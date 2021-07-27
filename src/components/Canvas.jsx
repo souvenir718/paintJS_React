@@ -32,6 +32,8 @@ const Canvas = () => {
   const [isDrawing, setIsDrawing] = useState(false);
   const [color, setColor] = useState("#2c2c2c");
   const [rangeValue, setRangeValue] = useState("2.5");
+  const [isFilling, setIsFilling] = useState(false);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     canvas.width = window.innerWidth * 0.7;
@@ -69,6 +71,46 @@ const Canvas = () => {
   const handleColorClick = (event) => {
     const color = event.target.style.backgroundColor;
     setColor(color);
+    let temp = ctx;
+    temp.strokeStyle = color;
+    temp.fillStyle = color;
+    setCtx(temp);
+  };
+
+  const handleRangeChange = (event) => {
+    const size = event.target.value;
+    setRangeValue(size);
+    let temp = ctx;
+    temp.lineWidth = size;
+    setCtx(temp);
+  };
+
+  const handleInitClick = () => {
+    let temp = ctx;
+    temp.fillStyle = "white";
+    temp.fillRect(0, 0, window.innerWidth * 0.7, window.innerHeight * 0.6);
+    temp.strokeStyle = "white";
+    setCtx(temp);
+  };
+
+  const handleSaveClick = () => {
+    const image = canvasRef.current.toDataURL();
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = "From PaintJS";
+    link.click();
+  };
+
+  const handleModeClick = () => {
+    setIsFilling((prev) => !prev);
+  };
+
+  const handleCanvasClick = () => {
+    if (isFilling) {
+      let temp = ctx;
+      temp.fillRect(0, 0, window.innerWidth * 0.7, window.innerHeight * 0.6);
+      setCtx(temp);
+    }
   };
 
   return (
@@ -87,11 +129,12 @@ const Canvas = () => {
         onMouseUp={finishDrawing}
         onMouseMove={drawing}
         onMouseLeave={finishDrawing}
+        onClick={handleCanvasClick}
       />
       <div className="text-center lg:w-2/3 w-full">
         <div style={{ marginBottom: "1.5rem" }}>
           <input
-            onChange={(e) => setRangeValue(e.target.value)}
+            onChange={handleRangeChange}
             type="range"
             min="0.1"
             max="5.0"
@@ -100,9 +143,9 @@ const Canvas = () => {
           />
         </div>
         <div style={{ marginBottom: "1.5rem" }}>
-          <Btn>Fill</Btn>
-          <Btn>Save</Btn>
-          <Btn>Init</Btn>
+          <Btn onClick={handleModeClick}>{isFilling ? "Fill" : "Paint"}</Btn>
+          <Btn onClick={handleSaveClick}>Save</Btn>
+          <Btn onClick={handleInitClick}>Init</Btn>
         </div>
         <div
           style={{
