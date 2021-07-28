@@ -17,9 +17,9 @@ const Btn = styled.button`
   font-size: 12px;
 `;
 const Colors = styled.div`
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
+  // width: 50px;
+  // height: 50px;
+  // border-radius: 25px;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 `;
@@ -147,46 +147,49 @@ const Canvas = () => {
           <Btn onClick={handleSaveClick}>Save</Btn>
           <Btn onClick={handleInitClick}>Init</Btn>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-          }}
-        >
+        <div className=" flex flex-wrap justify-center">
           <Colors
+            className="w-10 h-10 rounded-full"
             onClick={handleColorClick}
             style={{ backgroundColor: "#2c2c2c" }}
           ></Colors>
           <Colors
+            className="w-10 h-10 rounded-full"
             onClick={handleColorClick}
             style={{ backgroundColor: "white" }}
           ></Colors>
           <Colors
+            className="w-10 h-10 rounded-full"
             onClick={handleColorClick}
             style={{ backgroundColor: "#ff3b30" }}
           ></Colors>
           <Colors
+            className="w-10 h-10 rounded-full"
             onClick={handleColorClick}
             style={{ backgroundColor: "#ff9500" }}
           ></Colors>
           <Colors
+            className="w-10 h-10 rounded-full"
             onClick={handleColorClick}
             style={{ backgroundColor: "#ffcc00" }}
           ></Colors>
           <Colors
+            className="w-10 h-10 rounded-full"
             onClick={handleColorClick}
             style={{ backgroundColor: "#4cd963" }}
           ></Colors>
           <Colors
+            className="w-10 h-10 rounded-full"
             onClick={handleColorClick}
             style={{ backgroundColor: "#5ac8fa" }}
           ></Colors>
           <Colors
+            className="w-10 h-10 rounded-full"
             onClick={handleColorClick}
             style={{ backgroundColor: "#0579ff" }}
           ></Colors>
           <Colors
+            className="w-10 h-10 rounded-full"
             onClick={handleColorClick}
             style={{ backgroundColor: "#5856d6" }}
           ></Colors>
